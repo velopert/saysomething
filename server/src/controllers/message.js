@@ -2,6 +2,11 @@ import Message from '../models/message';
 import mongoose from 'mongoose';
 
 export default {
+    /*
+        API: POST /api/write
+        body: {message: 'message'}
+        description: Write a new message
+    */
     write: (req, res) => {
         const session = req.session;
 
@@ -54,6 +59,10 @@ export default {
         );
     },
     list: {
+        /*
+            API: GET /api/list
+            description: Loads initial message data
+        */
         initial: (req, res) => {
             const cache = req.app.get('cache');
             return res.json(
@@ -61,6 +70,12 @@ export default {
             );
 
         },
+        /*
+            API: GET /api/list/recent/:id
+            params:
+                id: message id
+            description: Load messages newer than given the given id
+        */
         recent: (req, res) => {
 
             const id = req.params.id;
@@ -94,7 +109,7 @@ export default {
                 .exec()
                 .then(
                     (messages) => {
-                        return res.json(messages);
+                        return res.json(messages.reverse());
                     }
                 ).catch(
                     (error) => {
@@ -103,16 +118,16 @@ export default {
                 );
             }
 
-            /* if the head matches id, it means there is no new memo. In this case,
+            /* if the tail matches id, it means there is no new memo. In this case,
             wait until there is a new memo. When 30 seconds pass, just return
             an empty array */
 
-            if(cache.head === id) {
+            if(cache.tail === id) {
                 const waitForNewMemo = new Promise(
                     (resolve, reject) => {
                         let timeoutId;
                         const check = () => {
-                            if(id !== cache.head) {
+                            if(id !== cache.tail) {
                                 // if the head is different
                                 resolve(); // resolve the Promise
                                 return;

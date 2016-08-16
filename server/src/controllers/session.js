@@ -9,7 +9,10 @@ function generateColor() {
     return [r,g,b];
 }
 
-// RETURNS OR CREATES A SESSION (WHICH IS IN A RANDOM COLOR)
+/*
+    API: GET /
+    description: Returns or creates a session, which is in a random color format
+*/
 const session = (req, res) => {
     const session = req.session;
 

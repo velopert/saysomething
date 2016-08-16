@@ -6,7 +6,7 @@ class MessageCache {
     constructor() {
         this.messages = [];
         this.idMap = [];
-        this.head ='';
+        this.tail = '';
         this.pending = true; // to do initial loading
         this.timeoutId = undefined;
     }
@@ -23,13 +23,14 @@ class MessageCache {
             .exec()
             .then(
                 (messages) => {
+                    messages.reverse(); // reverse the array, since queried result is in reversed order
                     this.messages = messages;
                     this.idMap = messages.map(
                         (msg) => {
                             return msg._id.toString();
                         }
                     );
-                    this.head = this.idMap[0];
+                    this.tail = this.idMap[messages.length-1];
                 }
             ).catch(
                 (error) => {
@@ -66,7 +67,7 @@ class MessageCache {
         if(this.idMap.indexOf(id) == -1)
             return undefined;
 
-        return this.messages.slice(0,index);
+        return this.messages.slice(index+1, this.messages.length);
     }
 }
 
