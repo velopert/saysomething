@@ -13,6 +13,9 @@ import MessageCache from './utils/MessageCache';
 
 import dotenv from 'dotenv';
 
+import path from 'path';
+
+
 // LOAD ENV CONFIG
 dotenv.config();
 
@@ -38,6 +41,11 @@ app.use(session({
     })
 }));
 app.use(cors());
+
+
+// SERVE STATIC FILES
+app.use('/', express.static(path.join(__dirname, './../../client/public')));
+
 
 // SETUP ROUTER
 app.use('/api', api);
