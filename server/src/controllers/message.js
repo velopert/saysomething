@@ -10,19 +10,20 @@ export default {
     write: (req, res) => {
         const session = req.session;
 
+        /*
         // check color existancy
         if(!session.color) {
-            return req.status(403).json({
+            return res.status(403).json({
                 error: {
                     code: 1,
                     message: 'Invalid Request'
                 }
             });
-        }
+        }*/
 
         // check message validity
         if(typeof req.body.message !== 'string') {
-            return req.status(400).json({
+            return res.status(400).json({
                 error: {
                     code: 2,
                     message: 'Invalid Message'
@@ -31,7 +32,7 @@ export default {
         }
 
         if(typeof req.body.message !== 'string') {
-            return req.status(400).json({
+            return res.status(400).json({
                 error: {
                     code: 3,
                     message: 'Message is empty'
@@ -94,11 +95,6 @@ export default {
 
             let recentMsg = cache.getRecentMsg(id);
 
-            // if there is more than one message, respond to the client
-            if(recentMsg.length > 0) {
-                return res.json(recentMsg);
-            }
-
             /* if recentMsg is undefined (which means given id does not exist in
             the cache), load directly from the mongod database.
             */
@@ -116,7 +112,16 @@ export default {
                         throw error;
                     }
                 );
+            } else {
+                // if there is more than one message, respond to the client
+                if(recentMsg.length > 0) {
+                    return res.json(recentMsg);
+                }
             }
+
+
+
+
 
             /* if the tail matches id, it means there is no new memo. In this case,
             wait until there is a new memo. When 30 seconds pass, just return
@@ -132,7 +137,7 @@ export default {
                                 resolve(); // resolve the Promise
                                 return;
                             }
-                            timeoutId = setTimeout(check, 100); // or else, repeat this
+                            timeoutId = setTimeout(check, 5); // or else, repeat this
                         };
                         check();
                         setTimeout(

@@ -7,6 +7,8 @@ import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
 
 import api from './routes';
+import cors from 'cors';
+
 import MessageCache from './utils/MessageCache';
 
 import dotenv from 'dotenv';
@@ -35,6 +37,7 @@ app.use(session({
         ttl:14 * 24 * 60 * 60
     })
 }));
+app.use(cors());
 
 // SETUP ROUTER
 app.use('/api', api);

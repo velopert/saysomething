@@ -46,14 +46,14 @@ class MessageCache {
                 loadData().then(
                     () => {
                         console.log('Cache is updated - ', this.messages[0]._id);
-                        this.timeoutId = setTimeout(work, 100);
+                        this.timeoutId = setTimeout(work, 5);
                     }
                 );
 
                 return;
             }
 
-            this.timeoutId = setTimeout(work, 1000);
+            this.timeoutId = setTimeout(work, 5);
         };
 
         work();
