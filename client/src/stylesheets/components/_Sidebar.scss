@@ -1,12 +1,17 @@
 .sidebar {
-    background-color: rgba(29, 31, 32, 0.3);
+    background-color: rgba(29, 31, 32, 0.5);
     color: white;
     position: absolute;
     right: 0px;
     width: 400px;
     height: 100%;
-    border-left: 1px solid black;
-    box-shadow: inset 13px 0px 10px -10px rgba(0,0,0,0.70);
+    @include tablet-and-desktop {
+        border-left: 1px solid black;
+        box-shadow: inset 13px 0px 10px -10px rgba(0,0,0,0.70);
+    }
+    @include phone {
+        width: 100%
+    }
 }
 
 .logo {

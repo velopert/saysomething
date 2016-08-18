@@ -1,0 +1,8 @@
+.message {
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+.message + .message {
+  border-top: 1px solid rgba(0,0, 0, 0.9);
+}

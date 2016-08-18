@@ -10,7 +10,6 @@ export default {
     write: (req, res) => {
         const session = req.session;
 
-        /*
         // check color existancy
         if(!session.color) {
             return res.status(403).json({
@@ -19,10 +18,10 @@ export default {
                     message: 'Invalid Request'
                 }
             });
-        }*/
+        }
 
         // check message validity
-        if(typeof req.body.message !== 'string') {
+        if(typeof req.body.message !== 'string' || typeof req.body.randomKey !== 'number') {
             return res.status(400).json({
                 error: {
                     code: 2,
@@ -31,7 +30,7 @@ export default {
             });
         }
 
-        if(typeof req.body.message !== 'string') {
+        if(req.body.message === '') {
             return res.status(400).json({
                 error: {
                     code: 3,
@@ -40,8 +39,18 @@ export default {
             });
         }
 
+        if(req.body.message.length > 50) {
+            return res.status(400).json({
+                error: {
+                    code: 5,
+                    message: 'Message is too long'
+                }
+            });
+        }
+
         const msg = new Message({
             message: req.body.message,
+            randomKey: req.body.randomKey,
             color: session.color
         });
 
@@ -118,10 +127,6 @@ export default {
                     return res.json(recentMsg);
                 }
             }
-
-
-
-
 
             /* if the tail matches id, it means there is no new memo. In this case,
             wait until there is a new memo. When 30 seconds pass, just return

@@ -6,6 +6,12 @@
     bottom: 0;
     left: 0;
     z-index: -99;
+        background: url(https://wallpaperscraft.com/image/road_night_lights_88183_225x300.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
 }
 
 .video-foreground,
@@ -22,6 +28,9 @@
     pointer-events: none;
     min-width: 100%;
     min-height: 100%;
+    @include phone-and-tablet {
+        display: none;
+    }
 }
 
 
