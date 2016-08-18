@@ -16,9 +16,10 @@ class MessageList extends React.Component {
         super(props);
     }
 
-    renderThumb() {
+    renderThumb({ style, ...props }) {
         const thumbStyle = {
-            backgroundColor: "white"
+            backgroundColor: 'rgba(255,255, 255, 0.8)',
+            borderRadius: '3px'
         };
 
         return (
@@ -35,7 +36,11 @@ class MessageList extends React.Component {
     render() {
         return(
             <div className="message-list">
-                <Scrollbars style={{width: '100%', height: '100%'}}>
+                <Scrollbars style={{width: '100%', height: '100%'}}
+                    renderThumbVertical={this.renderThumb}
+                    autoHide={true}
+                    autoHideTimeout={5000}
+                    autoHideDuration={200}>
                     <Message/>
                     <Message/>
                     <Message/>
