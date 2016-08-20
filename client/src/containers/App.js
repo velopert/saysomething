@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { VideoScreen, Sidebar, Input, MessageList } from 'components';
 
-
 class App extends Component {
     render(){
 

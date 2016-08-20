@@ -55,7 +55,7 @@ export default {
         });
 
         msg.save().then(
-            (message) => {
+            () => {
                 const cache = res.app.get('cache');
                 cache.notifyWorker();
                 return res.json({

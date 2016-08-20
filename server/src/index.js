@@ -15,7 +15,6 @@ import dotenv from 'dotenv';
 
 import path from 'path';
 
-
 // LOAD ENV CONFIG
 dotenv.config();
 
@@ -59,6 +58,7 @@ app.use((err, req, res, next) => {
             code: 0
         }
     });
+    next();
 });
 
 const cache = new MessageCache();
