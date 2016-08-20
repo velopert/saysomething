@@ -6,7 +6,7 @@ export function fetch({initial, latest=false, pivot}) {
         return request('/api/message');
     }
     if(latest) {
-        return request(`/api/message/recent/${pivot}`);
+        return request(`/api/message/recent/${pivot}`, 'get', {}, { timeout: 30 * 1000 });
     } else {
         return request(`/api/message/old/${pivot}`);
     }

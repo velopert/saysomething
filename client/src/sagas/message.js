@@ -11,8 +11,10 @@ function* fetch(action) {
     if(response) {
         yield put({type: ActionTypes.FETCH_MESSAGE.SUCCESS, payload: { response, ...action.payload }});
     } else {
-        yield put({type: ActionTypes.FETCH_MESSAGE.ERROR, payload: { error }});
-        yield delay(1000*10);
+        yield put({type: ActionTypes.FETCH_MESSAGE.FAILURE, payload: { error }});
+        if(error.code !== 'ECONNABORTED') {
+            yield delay(1000*10);
+        }
     }
 
 
