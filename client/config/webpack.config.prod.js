@@ -9,22 +9,11 @@ module.exports = {
         filename: 'bundle.js'
     },
 
-    devServer: {
-        hot: true,
-        inline: true,
-        host: '0.0.0.0',
-        port: 4000,
-        contentBase: __dirname + '/public/',
-        proxy: {
-            "*": "http://localhost:3000" // express 서버주소
-        }
-    },
-
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel?' + JSON.stringify({
+                loaders: ['babel?' + JSON.stringify({
                     cacheDirectory: true,
                     presets: ['es2015', 'react', 'stage-0']
                 })],
@@ -38,10 +27,21 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            screw_ie8: true,
+            warnings: false
+          },
+          mangle: {
+            screw_ie8: true
+          },
+          output: {
+            comments: false,
+            screw_ie8: true
+          }
         })
     ],
 

@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import session from 'express-session';
+import compression from 'compression';
 
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
@@ -40,6 +41,7 @@ app.use(session({
     })
 }));
 app.use(cors());
+app.use(compression());
 
 
 // SERVE STATIC FILES

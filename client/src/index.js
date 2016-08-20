@@ -10,8 +10,6 @@ import reducers from 'reducers';
 import rootSaga from 'sagas';
 
 
-require('stylesheets/main.scss');
-
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 const store = createStore(
