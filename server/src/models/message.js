@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const Message = new Schema({
     message: String,
     date: { type: Date, default: Date.now },
-    randomKey: Number,
+    uid: String,
     color: [] // stores color in r, g, b array
 });
 

@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 const propTypes = {
-    videoUrl: PropTypes.string
+    videoUrl: PropTypes.string,
+    visibility: PropTypes.bool
 };
 
 const defaultProps = {
-    videoUrl: "https://www.youtube.com/embed/njCDZWTI-xg?controls=1&showinfo=0&rel=0&autoplay=1&loop=1&playlist=njCDZWTI-xg"
+    videoUrl: "https://www.youtube.com/embed/njCDZWTI-xg?controls=1&showinfo=0&rel=0&autoplay=1&loop=1&playlist=njCDZWTI-xg",
+    visibility: true
 };
 
 class VideoScreen extends Component {
@@ -13,7 +15,7 @@ class VideoScreen extends Component {
         return (
             <div className="video-background">
                 <div className="video-foreground">
-                    <iframe src={this.props.videoUrl}></iframe>
+                    {this.props.visibility ? <iframe src={this.props.videoUrl}></iframe> : undefined }
                 </div>
             </div>
         );

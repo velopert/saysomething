@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 
 const propTypes = {
 
@@ -8,11 +8,8 @@ const defaultProps = {
 
 };
 
-class Sidebar extends React.Component {
+class Sidebar extends PureComponent {
 
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return(
@@ -22,6 +19,8 @@ class Sidebar extends React.Component {
             </div>
         );
     }
+
+
 }
 
 Sidebar.propTypes = propTypes;

@@ -15,7 +15,6 @@ function generateColor() {
 */
 const session = (req, res) => {
     const session = req.session;
-
     // if color is not set, set a new color
     if(!session.color) {
         session.color = generateColor();

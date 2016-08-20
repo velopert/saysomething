@@ -18,10 +18,14 @@ class MessageCache {
         const loadData = () => {
             return Message.find()
             .sort({_id: -1})
-            .limit(20)
+            .limit(25)
             .exec()
             .then(
                 (messages) => {
+                    if(messages.length == 0) {
+                        return false;
+                    }
+
                     messages.reverse(); // reverse the array, since queried result is in reversed order
                     this.messages = messages;
                     this.idMap = messages.map(
@@ -30,10 +34,12 @@ class MessageCache {
                         }
                     );
                     this.tail = this.idMap[messages.length-1];
+                    return true;
                 }
             ).catch(
                 (error) => {
                     console.error(error.stack);
+                    return false;
                 }
             );
         };
@@ -43,7 +49,13 @@ class MessageCache {
                 console.log("Data Loading..");
                 this.pending = false;
                 loadData().then(
-                    () => {
+                    (success) => {
+                        if(!success) {
+                            console.error('Data loading has failed, retry in 3 seconds');
+                            this.pending = true;
+                            this.timeoutId = setTimeout(work, 3000);
+                            return;
+                        }
                         console.log('Cache is updated - ', this.messages[0]._id);
                         this.timeoutId = setTimeout(work, 5);
                     }
