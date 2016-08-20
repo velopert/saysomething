@@ -1,0 +1,35 @@
+.toggle-video {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+    padding: 8px;
+    border: 1px solid white;
+    border-radius: 2px;
+    cursor: pointer;
+
+    -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+
+   @include phone-and-tablet {
+       display: none;
+   }
+
+}
+
+.toggle-video:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-video:active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
