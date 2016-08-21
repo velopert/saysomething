@@ -195,7 +195,7 @@ exports.default = {
 
             /* if recentMsg is undefined (which means given id does not exist in
             the cache), load directly from the mongod database.
-              if(typeof recentMsg === 'undefined') {
+             if(typeof recentMsg === 'undefined') {
                 Message.find({_id: { $gt: id}})
                 .sort({_id: -1})
                 .limit(20)
