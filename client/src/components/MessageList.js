@@ -33,23 +33,31 @@ class MessageList extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        
+        // THIS PART HANDLES AUTO SCROLLING AFTER DATA FETCHING
         if(prevProps.data.length !== this.props.data.length) {
+            
             if(this.props.fetchedHistory) {
+                // IF LOADES OLDER MESSAGE, SET THE SCROLL SO SO THAT THE USER
+                // CAN READ THE SAME PART THAT HE/SHE WAS LOOKING AT
                 this.element.scrollTop(this.element.getScrollHeight() - this.state.previousHeight);
             }
-
-
-
-            // scroll to bottom
+            
+            
+            // IF THE SCROLLBAR IS CLOSE TO THE SCROLLBOTTOM, SCROLL TO BOTTOM
+            // IF IT IS A INITIAL FETCHING, FIRST STATEMENT IS NOT TRUE, SO USE A initScrolled STATE TO HANDLE THIS
             if(this.element.getScrollHeight() - this.element.refs.view.clientHeight - this.element.getScrollTop() < 200 || !this.state.initScrolled) {
                 this.scrollToBottom();
+                
                 if(!this.state.initScrolled) {
                     this.setState({
                         initScrolled: true
                     });
                 }
             }
-
+            
+            
+            // SAVES THE PREVIOUS SCROLL POS
             if(this.state.previousHeight !== this.element.getScrollHeight()) {
                 this.setState({previousHeight: this.element.getScrollHeight()});
             }
@@ -63,7 +71,7 @@ class MessageList extends PureComponent {
     }
 
     handleScroll(e) {
-        //this.props.data.length >= 25 && !this.props.isAtTop
+        // THIS PART HANDLES THE MESSAGE HISTORY FETCHING
         if(this.element.getScrollTop() <= 60 && !this.props.loadingHistory
             && this.props.data.length >= 25 && !this.props.isAtTop) {
             this.props.fetchHistory();
@@ -72,6 +80,7 @@ class MessageList extends PureComponent {
     }
 
     renderThumb({ style, ...props }) {
+        // IT STYLIZES THE CUSTOM SCROLLBAR
         const thumbStyle = {
             backgroundColor: 'rgba(255,255, 255, 0.8)',
             borderRadius: '3px'
@@ -85,10 +94,13 @@ class MessageList extends PureComponent {
     }
 
     scrollToBottom() {
+        // SCROLL TO BOTTOM
         this.element.scrollTop(this.element.getScrollHeight());
     }
-
+    
+    
     mapDataToMessages(data) {
+        // MAP DATA TO MESSAGE COMPONENTS
         return data.map(
             (message) => {
                 return (
@@ -99,7 +111,9 @@ class MessageList extends PureComponent {
     }
 
     render() {
-
+        
+        // SPINNER IS VISIBLE ONLY WHEN THE USER IS NOT READING THE FIRST PAGE
+        
         const spinnerVisibility = (this.props.data.length >= 25 && !this.props.isAtTop);
 
         return(

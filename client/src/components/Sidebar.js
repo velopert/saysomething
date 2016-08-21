@@ -1,16 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 
-const propTypes = {
-
-};
-
-const defaultProps = {
-
-};
-
 class Sidebar extends PureComponent {
-
-
     render() {
         return(
             <div className="sidebar">
@@ -19,11 +9,7 @@ class Sidebar extends PureComponent {
             </div>
         );
     }
-
-
 }
 
-Sidebar.propTypes = propTypes;
-Sidebar.defaultProps = defaultProps;
 
 export default Sidebar;

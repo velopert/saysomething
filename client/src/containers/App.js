@@ -8,16 +8,13 @@ import * as uiActions from 'actions/ui';
 class App extends Component {
 
     componentDidMount() {
-
-
-        /*
-        const initialFetch = new Promise(
-            (resolve, reject) => {
-
-            }
-        )*/
+        
+        // GET THE SESSION
         this.props.sessionEvents.get();
+        // FETCH THE INTIAL DATA
         this.props.msgEvents.fetch({initial: true });
+        
+        // BIND THE METHODS
         this.handleWrite = this.handleWrite.bind(this);
         this.fetchHistory = this.fetchHistory.bind(this);
 
@@ -33,15 +30,16 @@ class App extends Component {
 
         this.props.msgEvents.write({message: this.props.ui.Input.value, uid: generateUID(), session: this.props.session, scroll: this.MessageList.scrollToBottom});
     }
-
+    
+    
     fetchHistory() {
+        // WHEN LOADING OLDER DATA, THE PIVOT IS THE FIRST ITEM SHOWN IN THE LIST
         this.props.msgEvents.fetch({initial: false, latest: false, pivot: this.props.message.data[0]._id});
     }
 
     render(){
         return (
             <div>
-                {/*<VideoScreen videoUrl="https://www.youtube.com/embed/-2U0Ivkn2Ds?controls=1&showinfo=0&rel=0&autoplay=1&loop=1&playlist=-2U0Ivkn2Ds"/>*/}
                 <VideoScreen videoUrl="https://www.youtube.com/embed/-2U0Ivkn2Ds?controls=1&showinfo=0&rel=0&autoplay=1&loop=1&playlist=-2U0Ivkn2Ds"
                     visibility={this.props.ui.Video.visibility}/>
                 <ToggleVideo onToggle={this.props.uiEvents.Video.toggle}

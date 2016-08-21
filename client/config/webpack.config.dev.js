@@ -5,7 +5,7 @@ module.exports = {
     entry: ['babel-polyfill', './src/index.js', './src/stylesheets/main.scss'],
 
     output: {
-        path: __dirname + '/../public/',
+        path: '/',
         filename: 'bundle.js'
     },
 
@@ -38,11 +38,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
+        new webpack.HotModuleReplacementPlugin()
     ],
 
     resolve: {

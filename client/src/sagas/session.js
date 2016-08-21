@@ -3,6 +3,9 @@ import { call, put, fork } from 'redux-saga/effects'
 import * as ActionTypes from 'actions/ActionTypes';
 import * as sessionApi from 'services/session';
 
+
+// GETS THE SESSION AND PUT IN THE SESSION STORE
+
 function* get(action) {
 
     const { response, error } = yield call(sessionApi.get);

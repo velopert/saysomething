@@ -26,9 +26,6 @@ class Message extends PureComponent {
     }
 
     render() {
-
-        console.log("RENDER");
-        // style='background-color: rgba(123,32, 60, 0.15);'
         const { message, color, _id } = this.props.data;
         const opacity = (_id==="") ? 0.27 : 0.35;
 

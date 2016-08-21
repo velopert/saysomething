@@ -12,6 +12,7 @@ const initialState = {
 export default function ui(state = initialState, action) {
     switch(action.type) {
         case ActionTypes.CHANGE_MESSAGE_INPUT:
+            // CHANGE THE MESSAGE INPUT
             return {
                 ...state,
                 Input: {
@@ -19,6 +20,7 @@ export default function ui(state = initialState, action) {
                 }
             };
         case ActionTypes.TOGGLE_VIDEO:
+            // TOGGLE THE VIDEO STATE
             return {
                 ...state,
                 Video: {
