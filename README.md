@@ -95,6 +95,6 @@ npm run build
 cd server
 npm start
 ```
-### License
+## License
 [MIT License](http://opensource.org/licenses/MIT).  
 Copyright (c) 2016 [velopert](https://www.velopert.com/).
