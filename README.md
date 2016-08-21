@@ -47,7 +47,7 @@ These instructions will get you a copy of the project up and running on your loc
     cd saysomething
     ```
 3. Install local dependencies  
-   There are two directories: client / server, go inside each folder and install the local dependencies
+   There are two directories: client / server, go inside each folder and install the local dependencies  
     ```
     cd client
     npm install
