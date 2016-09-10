@@ -14,7 +14,7 @@ Following technologies are used in this project:
 - redux-actions
 - redux-saga
 - axios
-- node-sas
+- node-sass
 - style-loader, css-loader, sass-loader
 - react-custom-scrollbars
 - express
