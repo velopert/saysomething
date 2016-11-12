@@ -2,13 +2,13 @@
 
 SaySomething is a simple real-time chat application implemented with long polling AJAX technique. React.js is used in front-end side, and Node.js / MongoDB is used in the back-end side.
 
-**Preview:** https://saysomething.hoah.xyz/
+**Preview:** https://saysomething.vlpt.us/
 
 ##Tech
 Following technologies are used in this project:
 - react
 - webpack
-- webpack-ev-server
+- webpack-dev-server
 - babel
 - redux
 - redux-actions
